@@ -1870,7 +1870,7 @@ PrefabInstance:
       objectReference: {fileID: 969618940}
     - target: {fileID: 5319203328079512096, guid: c0344e105b3e28e47b3289934737ff27, type: 3}
       propertyPath: radius
-      value: 38
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5319203328079512096, guid: c0344e105b3e28e47b3289934737ff27, type: 3}
       propertyPath: idleMaterial
@@ -1943,10 +1943,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8934334520878876321, guid: c0344e105b3e28e47b3289934737ff27, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2139717143}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0344e105b3e28e47b3289934737ff27, type: 3}
 --- !u!1001 &1396041509
 PrefabInstance:
@@ -2673,7 +2670,7 @@ PrefabInstance:
       objectReference: {fileID: 969618940}
     - target: {fileID: 5319203328079512096, guid: c0344e105b3e28e47b3289934737ff27, type: 3}
       propertyPath: radius
-      value: 38
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5319203328079512096, guid: c0344e105b3e28e47b3289934737ff27, type: 3}
       propertyPath: idleMaterial
@@ -2968,6 +2965,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7569580716619277981, guid: 26ab0ee964d21c34bb56e3c22abdd134, type: 3}
+      propertyPath: m_text
+      value: 20/20
+      objectReference: {fileID: 0}
     - target: {fileID: 8180139167656133575, guid: 26ab0ee964d21c34bb56e3c22abdd134, type: 3}
       propertyPath: m_Name
       value: HPBar
@@ -2993,20 +2994,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8934334520878876321, guid: c0344e105b3e28e47b3289934737ff27, type: 3}
   m_PrefabInstance: {fileID: 1085667747}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2139717143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2139717134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f43f861078b4940b678310dd5e845d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMusicFlag
-  soundSystem: {fileID: 951240457}
-  bossMusic: {fileID: 558942863}
 --- !u!1001 &255451243387739553
 PrefabInstance:
   m_ObjectHideFlags: 0
