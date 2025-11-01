@@ -13,6 +13,11 @@ public class EnemyDetectionApproachHero : MonoBehaviour
     [SerializeField] Material moveMaterialB;
     [SerializeField] float moveSwapInterval = 0.1f;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip inRangeClip;
+    [SerializeField] AudioClip originalClip;
+
     public bool PlayerInRange { get; private set; }
     public bool AtContact { get; private set; }
     public float CurrentDistance { get; private set; }
@@ -21,10 +26,12 @@ public class EnemyDetectionApproachHero : MonoBehaviour
     Renderer rend;
     float swapTimer;
     bool useA = true;
+    bool switchedToRangeClip;
 
     void Awake()
     {
         rend = GetComponent<Renderer>();
+        if (!originalClip && audioSource) originalClip = audioSource.clip;
     }
 
     void Update()
@@ -39,6 +46,16 @@ public class EnemyDetectionApproachHero : MonoBehaviour
         CurrentDistance = Mathf.Sqrt(dotDistance);
         PlayerInRange = dotDistance < r2;
         AtContact = CurrentDistance <= playerRadius + contactBuffer;
+
+        if (PlayerInRange && !switchedToRangeClip)
+        {
+            if (audioSource && inRangeClip)
+            {
+                audioSource.clip = inRangeClip;
+                audioSource.Play();
+            }
+            switchedToRangeClip = true;
+        }
 
         bool isApproaching = PlayerInRange && !AtContact;
 
@@ -67,6 +84,15 @@ public class EnemyDetectionApproachHero : MonoBehaviour
             swapTimer = 0f;
             useA = true;
             if (rend && idleMaterial) rend.material = idleMaterial;
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (audioSource && originalClip)
+        {
+            audioSource.clip = originalClip;
+            audioSource.Play();
         }
     }
 }
