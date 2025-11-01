@@ -3,38 +3,35 @@ using System.Collections;
 
 public class SimpleWaveTimeline : MonoBehaviour
 {
+    [Header("Player + Range")]
+    [SerializeField] Transform player;
+    [SerializeField] float triggerRadius = 12f;
+
+    [Header("Spawn (edge opposite player)")]
+    [SerializeField] float spawnRadius = 6f;
+    [SerializeField] float spawnOffsetX = 0f; // local-space offset
+    [SerializeField] float spawnOffsetZ = 0f; // local-space offset
+
     [Header("Prefabs")]
-    [SerializeField] GameObject villagerPrefab;
     [SerializeField] GameObject soldierPrefab;
     [SerializeField] GameObject heroPrefab;
 
-    [Header("Counts")]
-    [SerializeField] int villagersCount = 10;
+    [Header("Counts / Timing (seconds)")]
     [SerializeField] int soldiersCount = 20;
-
-    [Header("Timing (seconds)")]
-    [SerializeField] float villagerInterval = 1f;   // 1s between villagers
-    [SerializeField] float soldierInterval = 1f;   // 1s between soldiers
-    [SerializeField] float soldiersStartAt = 30f;  // start soldiers at t=30s
-    [SerializeField] float heroAt = 60f;  // spawn hero at t=60s
-
-    [Header("Spawn")]
-    [SerializeField] float spawnRadius = 0f;        // 0 = exact spawner position
+    [SerializeField] float soldierInterval = 1f;
+    [SerializeField] float soldiersStartAt = 30f;
+    [SerializeField] float heroAt = 60f;
 
     void Start()
     {
-        StartCoroutine(SpawnVillagersPhase());
-        StartCoroutine(SpawnSoldiersPhase());
-        StartCoroutine(SpawnHeroPhase());
+        StartCoroutine(BeginWhenPlayerInside());
     }
 
-    IEnumerator SpawnVillagersPhase()
+    IEnumerator BeginWhenPlayerInside()
     {
-        for (int i = 0; i < villagersCount; i++)
-        {
-            Spawn(villagerPrefab);
-            yield return new WaitForSeconds(villagerInterval);
-        }
+        while (!PlayerInside()) yield return null;
+        StartCoroutine(SpawnSoldiersPhase());
+        StartCoroutine(SpawnHeroPhase());
     }
 
     IEnumerator SpawnSoldiersPhase()
@@ -42,7 +39,7 @@ public class SimpleWaveTimeline : MonoBehaviour
         yield return new WaitForSeconds(soldiersStartAt);
         for (int i = 0; i < soldiersCount; i++)
         {
-            Spawn(soldierPrefab);
+            SpawnAtEdge(soldierPrefab);
             yield return new WaitForSeconds(soldierInterval);
         }
     }
@@ -50,18 +47,97 @@ public class SimpleWaveTimeline : MonoBehaviour
     IEnumerator SpawnHeroPhase()
     {
         yield return new WaitForSeconds(heroAt);
-        Spawn(heroPrefab);
+        SpawnAtEdge(heroPrefab);
     }
 
-    void Spawn(GameObject prefab)
+    bool PlayerInside()
+    {
+        if (!player) return false;
+        Vector3 center = transform.position;
+        Vector2 d = new Vector2(player.position.x - center.x, player.position.z - center.z);
+        return Vector2.Dot(d, d) <= triggerRadius * triggerRadius;
+    }
+
+    void SpawnAtEdge(GameObject prefab)
     {
         if (!prefab) return;
-        Vector3 basePos = transform.position;
-        if (spawnRadius > 0f)
+
+        Vector3 spawnCenter = GetSpawnCenter();
+        Vector3 pos;
+
+        if (!player || spawnRadius <= 0f)
         {
-            Vector2 off = Random.insideUnitCircle * spawnRadius;
-            basePos += new Vector3(off.x, 0f, off.y);
+            pos = spawnCenter;
         }
-        Instantiate(prefab, basePos, Quaternion.identity);
+        else
+        {
+            Vector3 toPlayer = player.position - spawnCenter;
+            toPlayer.y = 0f;
+
+            if (toPlayer.sqrMagnitude < 0.0001f)
+            {
+                float ang = Random.value * Mathf.PI * 2f;
+                Vector3 dir = new Vector3(Mathf.Cos(ang), 0f, Mathf.Sin(ang));
+                pos = spawnCenter + dir * spawnRadius;
+            }
+            else
+            {
+                Vector3 dirAway = (-toPlayer).normalized;
+                pos = spawnCenter + dirAway * spawnRadius;
+            }
+        }
+
+        Instantiate(prefab, pos, Quaternion.identity);
+    }
+
+    Vector3 GetSpawnCenter()
+    {
+        // local-space offset so it follows the spawner’s transform
+        return transform.TransformPoint(new Vector3(spawnOffsetX, 0f, spawnOffsetZ));
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // trigger radius (around spawner)
+        Gizmos.color = Color.yellow;
+        DrawCircleXZ(transform.position, triggerRadius);
+
+        // spawn radius (around offset center)
+        Vector3 spawnCenter = GetSpawnCenter();
+        Gizmos.color = Color.cyan;
+        DrawCircleXZ(spawnCenter, spawnRadius);
+
+        // centers
+        Gizmos.color = Color.white;
+        Gizmos.DrawSphere(transform.position + Vector3.up * 0.1f, 0.1f);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(spawnCenter + Vector3.up * 0.1f, 0.1f);
+
+        // preview spawn edge opposite player
+        if (player && spawnRadius > 0f)
+        {
+            Vector3 toPlayer = player.position - spawnCenter; toPlayer.y = 0f;
+            if (toPlayer.sqrMagnitude >= 0.0001f)
+            {
+                Vector3 dirAway = (-toPlayer).normalized;
+                Vector3 edge = spawnCenter + dirAway * spawnRadius;
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawSphere(edge + Vector3.up * 0.1f, 0.12f);
+                Gizmos.DrawLine(spawnCenter + Vector3.up * 0.1f, edge + Vector3.up * 0.1f);
+            }
+        }
+    }
+
+    void DrawCircleXZ(Vector3 c, float r, int segs = 64)
+    {
+        if (r <= 0f) return;
+        Vector3 prev = c + new Vector3(r, 0f, 0f);
+        for (int i = 1; i <= segs; i++)
+        {
+            float t = (i / (float)segs) * Mathf.PI * 2f;
+            Vector3 p = c + new Vector3(Mathf.Cos(t) * r, 0f, Mathf.Sin(t) * r);
+            Gizmos.DrawLine(prev, p);
+            prev = p;
+        }
     }
 }
