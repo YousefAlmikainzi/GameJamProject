@@ -2952,11 +2952,6 @@ PrefabInstance:
       addedObject: {fileID: 2017059591}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d3df8da7cb1b7a4182ae5d068f3d93f, type: 3}
---- !u!4 &911349979 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3373267445354618408, guid: 7d3df8da7cb1b7a4182ae5d068f3d93f, type: 3}
-  m_PrefabInstance: {fileID: 911349978}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &951240457
 GameObject:
   m_ObjectHideFlags: 0
@@ -4069,6 +4064,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8934334520878876321, guid: c0344e105b3e28e47b3289934737ff27, type: 3}
   m_PrefabInstance: {fileID: 1513353818}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1184810174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184810173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce4981cf9cb393342ab593892c5ef333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDetectionApproachHero
+  player: {fileID: 969618940}
+  radius: 100
+  audioSource: {fileID: 951240458}
+  inRangeClip: {fileID: 8300000, guid: b37662ac430b5504582089b8eef04e90, type: 3}
+  originalClip: {fileID: 8300000, guid: d74f141f8c5283b42b7eea771a802a27, type: 3}
 --- !u!1 &1279098649
 GameObject:
   m_ObjectHideFlags: 0
@@ -4412,7 +4424,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8934334520878876321, guid: c0344e105b3e28e47b3289934737ff27, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1184810174}
   m_SourcePrefab: {fileID: 100100000, guid: c0344e105b3e28e47b3289934737ff27, type: 3}
 --- !u!1 &1569896415
 GameObject:
@@ -4565,6 +4580,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601726666}
   m_CullTransparentMesh: 1
+--- !u!4 &1663727539 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3373267445354618408, guid: 7d3df8da7cb1b7a4182ae5d068f3d93f, type: 3}
+  m_PrefabInstance: {fileID: 911349978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1675672834
 GameObject:
   m_ObjectHideFlags: 0
@@ -5662,7 +5682,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 0.7132075, g: 0.7132075, b: 0.7132075, a: 1}
+  m_Color: {r: 0.2754717, g: 0.2754717, b: 0.2754717, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -5725,13 +5745,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014988646}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.9376402, y: -0.062175583, z: 0.25123993, w: 0.23204246}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 152.2, y: -30, z: 0}
 --- !u!1 &2017059587
 GameObject:
   m_ObjectHideFlags: 0
@@ -5842,7 +5862,7 @@ Transform:
   m_LocalScale: {x: 0.81748855, y: 11.132596, z: 11.3097105}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 911349979}
+  m_Father: {fileID: 1663727539}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &2036879889
 GameObject:
@@ -6198,13 +6218,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDetectionApproachHero
   player: {fileID: 969618940}
   radius: 100
-  movementSpeed: 6
-  playerRadius: 3
-  contactBuffer: 0.15
-  idleMaterial: {fileID: 2100000, guid: da738253c0aebbb42bd2283935bcbbc5, type: 2}
-  moveMaterialA: {fileID: 2100000, guid: 6d3281b80cfa59d45819f0821ba8814c, type: 2}
-  moveMaterialB: {fileID: 2100000, guid: 738a63c9d63b9304d9c9122819bc3366, type: 2}
-  moveSwapInterval: 0.1
   audioSource: {fileID: 951240458}
   inRangeClip: {fileID: 8300000, guid: b37662ac430b5504582089b8eef04e90, type: 3}
   originalClip: {fileID: 8300000, guid: d74f141f8c5283b42b7eea771a802a27, type: 3}
