@@ -211,6 +211,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 969618944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &674100570
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 924817666127441085, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_Name
+      value: Villager2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959683302096399485, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 969618944}
+    - target: {fileID: 3617697647654056990, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 969618940}
+    - target: {fileID: 4594522400573944081, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594522400573944081, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594522400573944081, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594522400573944081, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594522400573944081, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594522400573944081, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594522400573944081, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594522400573944081, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594522400573944081, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594522400573944081, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e0ad9b689c1da8248ac56a4bba7e6c8a, type: 3}
 --- !u!1 &899934307
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +290,7 @@ GameObject:
   - component: {fileID: 899934308}
   - component: {fileID: 899934312}
   - component: {fileID: 899934313}
+  - component: {fileID: 899934314}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Untagged
@@ -358,6 +424,19 @@ MonoBehaviour:
   target: {fileID: 969618944}
   yawOnly: 1
   invertForward: 1
+--- !u!114 &899934314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899934307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f86310554118644e9e942e53cf7b6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemies
+  type: {fileID: 11400000, guid: 3d509a916a2d2f949a96272389d0c3e2, type: 2}
 --- !u!1 &969618940
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +896,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7569580716619277981, guid: 26ab0ee964d21c34bb56e3c22abdd134, type: 3}
+      propertyPath: m_text
+      value: 10/10
+      objectReference: {fileID: 0}
     - target: {fileID: 8180139167656133575, guid: 26ab0ee964d21c34bb56e3c22abdd134, type: 3}
       propertyPath: m_Name
       value: HPBar
@@ -901,3 +984,4 @@ SceneRoots:
   - {fileID: 255451243387739553}
   - {fileID: 2080195192}
   - {fileID: 899934311}
+  - {fileID: 674100570}
