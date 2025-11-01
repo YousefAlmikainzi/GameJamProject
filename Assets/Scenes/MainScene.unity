@@ -1365,6 +1365,9 @@ MonoBehaviour:
   deathClip: {fileID: 8300000, guid: 47f41327ff7057b4a851782aa3335d89, type: 3}
   deathVolume: 1
   audioSource: {fileID: 1889538378}
+  targetRenderer: {fileID: 0}
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.08
 --- !u!1 &951240457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,7 +1656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   hpBar: {fileID: 1448058552}
-  maxHealth: 10
+  maxHealth: 20
   restartDelay: 0
 --- !u!114 &969618947
 MonoBehaviour:
@@ -2376,6 +2379,9 @@ MonoBehaviour:
   deathClip: {fileID: 8300000, guid: 47f41327ff7057b4a851782aa3335d89, type: 3}
   deathVolume: 1
   audioSource: {fileID: 1889538378}
+  targetRenderer: {fileID: 0}
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.08
 --- !u!114 &1916647476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2965,6 +2971,14 @@ PrefabInstance:
     - target: {fileID: 8180139167656133575, guid: 26ab0ee964d21c34bb56e3c22abdd134, type: 3}
       propertyPath: m_Name
       value: HPBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783140456704112181, guid: 26ab0ee964d21c34bb56e3c22abdd134, type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783140456704112181, guid: 26ab0ee964d21c34bb56e3c22abdd134, type: 3}
+      propertyPath: maxHealth
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
