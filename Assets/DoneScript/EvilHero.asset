@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EvilHero
   m_EditorClassIdentifier: Assembly-CSharp::EnemyType
   maxHealth: 15
-  damageToPlayer: 4
+  damageToPlayer: 3

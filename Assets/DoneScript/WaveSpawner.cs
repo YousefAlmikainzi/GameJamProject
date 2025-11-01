@@ -23,8 +23,9 @@ public class SimpleWaveTimeline : MonoBehaviour
     [SerializeField] float heroAt = 60f;
 
     [Header("Endless Enemy")]
-    [SerializeField] GameObject enemyPrefab;      
-    [SerializeField] float enemyInterval = 1f;    
+    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] float enemyInterval = 1f;
+    [SerializeField] float enemyStartDelay = 60f;
 
     [Header("Audio (switch once on first entry)")]
     [SerializeField] AudioSource audioSource;
@@ -49,7 +50,7 @@ public class SimpleWaveTimeline : MonoBehaviour
 
         StartCoroutine(SpawnSoldiersPhase());
         StartCoroutine(SpawnHeroPhase());
-        StartCoroutine(SpawnEnemyForeverPhase()); 
+        StartCoroutine(SpawnEnemyForeverPhase());
     }
 
     IEnumerator SpawnSoldiersPhase()
@@ -70,6 +71,9 @@ public class SimpleWaveTimeline : MonoBehaviour
 
     IEnumerator SpawnEnemyForeverPhase()
     {
+        if (enemyStartDelay > 0f)
+            yield return new WaitForSeconds(enemyStartDelay);
+
         while (true)
         {
             SpawnAtEdge(enemyPrefab);
