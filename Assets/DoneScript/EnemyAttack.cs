@@ -17,6 +17,11 @@ public class EnemyAttack : MonoBehaviour
     [Header("Projectile Lifetime")]
     [SerializeField] float projectileLifetime = 2f;
 
+    [Header("SFX")]
+    [SerializeField] AudioClip fireSfx;
+    [SerializeField] AudioSource sfxSource;
+    [SerializeField] float sfxVolume = 1f;
+
     float nextFireTime;
     EnemyDetectionApproach detector;
 
@@ -49,5 +54,14 @@ public class EnemyAttack : MonoBehaviour
             fire.Launch(projectileSpeed, gameObject);
             if (projectileLifetime > 0f) Destroy(go, projectileLifetime);
         }
+
+        PlayShotSfx();
+    }
+
+    void PlayShotSfx()
+    {
+        if (!fireSfx) return;
+        if (sfxSource) sfxSource.PlayOneShot(fireSfx, sfxVolume);
+        else AudioSource.PlayClipAtPoint(fireSfx, transform.position, sfxVolume);
     }
 }
