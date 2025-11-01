@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 2.113, y: 1.217, z: 0.77115}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -71,7 +71,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3c249fcd77b62a9498be917d98ae6905, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,7 +128,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f86310554118644e9e942e53cf7b6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Soldier
-  type: {fileID: 11400000, guid: 70ca7c93ab81dff4a93c1bc989980092, type: 2}
+  type: {fileID: 11400000, guid: 4515b3bc0cd65b148a2bd5c3a95ab664, type: 2}
+  deathClip: {fileID: 8300000, guid: 47f41327ff7057b4a851782aa3335d89, type: 3}
+  deathVolume: 1
+  audioSource: {fileID: 0}
+  targetRenderer: {fileID: 0}
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.08
 --- !u!114 &5319203328079512096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,9 +148,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDetectionApproach
   player: {fileID: 0}
-  radius: 5
-  movementSpeed: 2
+  radius: 50
+  movementSpeed: 6
   playerRadius: 3
+  contactBuffer: 0.15
+  idleMaterial: {fileID: 2100000, guid: da738253c0aebbb42bd2283935bcbbc5, type: 2}
+  moveMaterialA: {fileID: 2100000, guid: 6d3281b80cfa59d45819f0821ba8814c, type: 2}
+  moveMaterialB: {fileID: 2100000, guid: 738a63c9d63b9304d9c9122819bc3366, type: 2}
+  moveSwapInterval: 0.1
 --- !u!114 &392616877890271053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,8 +185,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoldierAttack
   projectilePrefab: {fileID: 0}
   player: {fileID: 0}
-  enemyType: {fileID: 11400000, guid: 70ca7c93ab81dff4a93c1bc989980092, type: 2}
-  fireInterval: 3
-  projectileSpeed: 3
+  enemyType: {fileID: 11400000, guid: cdc195b43e76c954f81248f7cc29551b, type: 2}
+  fireInterval: 2
+  projectileSpeed: 11
   offsetXZ: {x: 0, y: 0.5}
-  projectileLifetime: 2
+  projectileLifetime: 1
+  fireSfx: {fileID: 8300000, guid: 54ea58010a5ae99478a3a3ca359ebf18, type: 3}
+  sfxSource: {fileID: 0}
+  sfxVolume: 1

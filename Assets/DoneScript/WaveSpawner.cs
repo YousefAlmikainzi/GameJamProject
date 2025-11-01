@@ -9,8 +9,8 @@ public class SimpleWaveTimeline : MonoBehaviour
 
     [Header("Spawn (edge opposite player)")]
     [SerializeField] float spawnRadius = 6f;
-    [SerializeField] float spawnOffsetX = 0f; // local-space offset
-    [SerializeField] float spawnOffsetZ = 0f; // local-space offset
+    [SerializeField] float spawnOffsetX = 0f;
+    [SerializeField] float spawnOffsetZ = 0f;
 
     [Header("Prefabs")]
     [SerializeField] GameObject soldierPrefab;
@@ -22,6 +22,11 @@ public class SimpleWaveTimeline : MonoBehaviour
     [SerializeField] float soldiersStartAt = 30f;
     [SerializeField] float heroAt = 60f;
 
+    [Header("Audio (switch once on first entry)")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip enterClip;
+    bool audioSwitched;
+
     void Start()
     {
         StartCoroutine(BeginWhenPlayerInside());
@@ -30,6 +35,14 @@ public class SimpleWaveTimeline : MonoBehaviour
     IEnumerator BeginWhenPlayerInside()
     {
         while (!PlayerInside()) yield return null;
+
+        if (!audioSwitched && audioSource && enterClip)
+        {
+            audioSource.clip = enterClip;
+            audioSource.Play();
+            audioSwitched = true;
+        }
+
         StartCoroutine(SpawnSoldiersPhase());
         StartCoroutine(SpawnHeroPhase());
     }
@@ -92,28 +105,23 @@ public class SimpleWaveTimeline : MonoBehaviour
 
     Vector3 GetSpawnCenter()
     {
-        // local-space offset so it follows the spawner’s transform
         return transform.TransformPoint(new Vector3(spawnOffsetX, 0f, spawnOffsetZ));
     }
 
     void OnDrawGizmosSelected()
     {
-        // trigger radius (around spawner)
         Gizmos.color = Color.yellow;
         DrawCircleXZ(transform.position, triggerRadius);
 
-        // spawn radius (around offset center)
         Vector3 spawnCenter = GetSpawnCenter();
         Gizmos.color = Color.cyan;
         DrawCircleXZ(spawnCenter, spawnRadius);
 
-        // centers
         Gizmos.color = Color.white;
         Gizmos.DrawSphere(transform.position + Vector3.up * 0.1f, 0.1f);
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(spawnCenter + Vector3.up * 0.1f, 0.1f);
 
-        // preview spawn edge opposite player
         if (player && spawnRadius > 0f)
         {
             Vector3 toPlayer = player.position - spawnCenter; toPlayer.y = 0f;
